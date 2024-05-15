@@ -1,0 +1,44 @@
+<p style="color: green"><%= notice %></p>
+
+<h1 class="d-flex justify-content-center">Bovinos</h1>
+
+<div id="bovinos">
+  <table class="table table-hover">
+    <thead>
+        <tr>
+          <th>Brinco</th>
+          <th>Nome</th>
+          <th>Situação</th>
+          <th>Sexo</th>
+          <th>Brinco da Mãe</th>
+          <th>Brinco do Pai</th>
+          <th>Raça</th>
+          <th>Data Nascimento</th>
+          <th>Data Prenhês</th>
+          <th>Data Ultimo Parto</th>
+          <th colspan="3"></th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @bovinos.each do |bovino| %>
+            <td><%= bovino.brinco%></td>
+            <td><%= bovino.nome%></td>
+            <td><%= bovino.situacao%></td>          
+            <td><%= bovino.sexo%></td>
+            <td><%= bovino.brinco_mae%></td>
+            <td><%= bovino.brinco_pai%></td>
+            <td><%= bovino.raca%></td>
+            <td><%= data_br(bovino.data_nascimento) %></td>
+            <td><%= data_br(bovino.data_prenhes) %></td>
+            <td><%= data_br(bovino.data_ultimo_parto) %></td>
+            <td> <%= button_to "Editar", edit_bovino_path(bovino), method: :get, class: "btn btn-success" %>
+            <td> <%= button_to "Deletar", bovino, method: :delete, class: "btn btn-danger" %> </td>
+        </tr>
+        <% end %>
+      <tbody>
+  </table>
+</div>
+
+<td> <%= link_to "Cadastrar", new_bovino_path, class: "btn btn-primary" %> </td>
+

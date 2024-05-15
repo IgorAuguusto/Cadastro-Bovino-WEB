@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @bovino %>
+
+<div>
+  <%= link_to "Editar Bovino", edit_bovino_path(@bovino) %> |
+  <%= link_to "Voltar", bovinos_path %>
+
+  <%= button_to "Apagar Bovino", @bovino, method: :delete %>
+</div>
