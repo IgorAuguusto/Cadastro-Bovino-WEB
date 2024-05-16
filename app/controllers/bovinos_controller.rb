@@ -56,6 +56,21 @@ class BovinosController < ApplicationController
     end
   end
 
+  def search
+    query = params[:query]
+  
+    @bovino = Bovino.find_by(brinco: query) || Bovino.find_by(nome: query)
+  
+    if @bovino
+      render "bovinos/show"
+    else
+      flash[:alert] = "Nenhum bovino encontrado com o brinco ou nome '#{query}'."
+      @bovinos = Bovino.all
+      render "bovinos/index"
+    end
+  end
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bovino

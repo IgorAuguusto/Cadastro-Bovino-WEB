@@ -1,10 +1,41 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @bovino %>
+<h1 class="d-flex justify-content-center">Bovino</h1>
 
-<div>
-  <%= link_to "Editar Bovino", edit_bovino_path(@bovino) %> |
-  <%= link_to "Voltar", bovinos_path %>
-
-  <%= button_to "Apagar Bovino", @bovino, method: :delete %>
+<div id="bovinos" class="m-3">
+  <table class="table table-hover">
+    <thead>
+        <tr>
+          <th>Brinco</th>
+          <th>Nome</th>
+          <th>Situação</th>
+          <th>Sexo</th>
+          <th>Brinco da Mãe</th>
+          <th>Brinco do Pai</th>
+          <th>Raça</th>
+          <th>Data Nascimento</th>
+          <th>Data Prenhês</th>
+          <th>Data Ultimo Parto</th>
+          <th colspan="3"></th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr>
+            <td><%= @bovino.brinco%></td>
+            <td><%= @bovino.nome%></td>
+            <td><%= @bovino.situacao%></td>          
+            <td><%= @bovino.sexo%></td>
+            <td><%= @bovino.brinco_mae%></td>
+            <td><%= @bovino.brinco_pai%></td>
+            <td><%= @bovino.raca%></td>
+            <td><%= data_br(@bovino.data_nascimento) %></td>
+            <td><%= data_br(@bovino.data_prenhes) %></td>
+            <td><%= data_br(@bovino.data_ultimo_parto) %></td>
+            <td> <%= button_to "Editar", edit_bovino_path(@bovino), method: :get, class: "btn btn-success" %>
+            <td> <%= button_to "Deletar", @bovino, method: :delete, class: "btn btn-danger" %> </td>
+            <td> <%= link_to "Voltar", bovinos_path, class: "btn btn-primary"%> <td>
+      </tr>
+      <tbody>
+  </table>
 </div>
+

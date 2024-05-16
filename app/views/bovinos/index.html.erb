@@ -2,7 +2,21 @@
 
 <h1 class="d-flex justify-content-center">Bovinos</h1>
 
-<div id="bovinos">
+<% if flash[:alert] %>
+  <div class="alert alert-warning">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<div id="divBusca" class="d-flex flex-row-reverse bd-highlight">
+  <%= form_with url: "/search", method: :post do |form| %>
+    <%= link_to "Cadastrar", new_bovino_path, class: "btn btn-primary m-4 bd-highlight" %> 
+    <%= form.label :query, "Pesquisar:" %>
+    <%= form.text_field :query, class: "m-3 bd-highlight" %>
+  <% end %>
+</div>
+
+<div id="bovinos" class="m-3">
   <table class="table table-hover">
     <thead>
         <tr>
@@ -39,6 +53,4 @@
       <tbody>
   </table>
 </div>
-
-<td> <%= link_to "Cadastrar", new_bovino_path, class: "btn btn-primary" %> </td>
 

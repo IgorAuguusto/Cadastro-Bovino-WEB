@@ -1,82 +1,104 @@
-<%= form_with(model: bovino) do |form| %>
-  <div>
-    <div class="form-group">
-      <% if bovino.errors.any? %>
-        <div style="color: red">
-          <h2><%= pluralize(bovino.errors.count, "error") %> prohibited this bovino from being saved:</h2>
+<%= form_with(model: bovino, local: true, html: { class: "form-horizontal" }) do |form| %>
+  <% if bovino.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% bovino.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-          <ul>
-            <% bovino.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-
-      <div class="form-group">
-        <%= form.label :brinco, style: "display: block" %>
-        <%= form.text_field :brinco %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :nome, style: "display: block" %>
-        <%= form.text_field :nome %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label "Situação", style: "display: block" %>
-        <%= form.text_field :situacao %>
-      </div>
-      
-      <fieldset>
-        <%= form.label :sexo, "Sexo", style: "display: block" %>
-        <div class="form-group">
-          <%= form.radio_button :sexo, 'Macho', id: 'macho' %>
-          <%= form.label :sexo, 'Macho', for: 'macho' %>
-
-          <%= form.radio_button :sexo, 'Fêmea', id: 'femea' %>
-          <%= form.label :sexo, 'Fêmea', for: 'femea' %>
-        </div>
-      </fieldset>
-
-
-      <div class="form-group">
-        <%= form.label "Brinco da Mãe", style: "display: block" %>
-        <%= form.text_field :brinco_mae %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label "Brinco do Pai", style: "display: block" %>
-        <%= form.text_field :brinco_pai %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label "Raça", style: "display: block" %>
-        <%= form.text_field :raca %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label "Data do Nascimento", style: "display: block" %>
-        <%= form.date_field :data_nascimento %>
-      </div>
-      
-      <div id="extra-fields" style="display: none;">
-        <div class="form-group">
-          <%= form.label :data_prenhes, "Data Prenhês", style: "display: block" %>
-          <%= form.date_field :data_prenhes %>
-        </div>
-
-        <div class="form-group">
-          <%= form.label :data_ultimo_parto, "Data do Ultimo Parto", style: "display: block" %>
-          <%= form.date_field :data_ultimo_parto %>
-        </div>
-      </div>
-      <div class="form-group">
-        <%=form.submit %>
+  <div class="container mt-4 gap-3 d-flex flex-column" style="width: 70vw">
+    <div class="form-group row">
+      <%= form.label :brinco, class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_field :brinco, class: "form-control" %>
       </div>
     </div>
 
-   <script>
+    <div class="form-group row">
+      <%= form.label :nome, class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_field :nome, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Situação", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.select :situacao, ["Em Lactação", "Seca", "Vendido", "Morto"], {}, class: "form-control" %>
+      </div>
+    </div>
+    
+    <fieldset class="form-group row">
+      <legend class="col-form-label col-2 pt-0">Sexo</legend>
+      <div class="col-10">
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :sexo, 'Macho', id: 'macho', class: "form-check-input" %>
+          <%= form.label :sexo, 'Macho', for: 'macho', class: "form-check-label" %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :sexo, 'Fêmea', id: 'femea', class: "form-check-input" %>
+          <%= form.label :sexo, 'Fêmea', for: 'femea', class: "form-check-label" %>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="form-group row">
+      <%= form.label "Brinco da Mãe", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_field :brinco_mae, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Brinco do Pai", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_field :brinco_pai, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Raça", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.select :raca, ["Girolando", "Holandês", "Gir", "Jersey"], {}, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <%= form.label "Data do Nascimento", class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.date_field :data_nascimento, class: "form-control" %>
+      </div>
+    </div>
+    
+    <div id="extra-fields" class="mt-4 gap-3 flex-column" style="display: none;">
+      <div class="form-group row">
+        <%= form.label :data_prenhes, "Data Prenhês", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.date_field :data_prenhes, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= form.label :data_ultimo_parto, "Data do Ultimo Parto", class: "col-2 col-form-label" %>
+        <div class="col-10">
+          <%= form.date_field :data_ultimo_parto, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-10 offset-2">
+        <%= form.submit class: 'btn btn-success' %>
+        <%= link_to "Voltar", bovinos_path, class: "btn btn-primary"%>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
     document.addEventListener("DOMContentLoaded", function() {
       var machoRadio = document.getElementById('macho');
       var femeaRadio = document.getElementById('femea');
@@ -84,7 +106,7 @@
 
       function toggleExtraFields() {
         if (femeaRadio.checked) {
-          extraFields.style.display = 'block';
+          extraFields.style.display = 'flex';
         } else {
           extraFields.style.display = 'none';
         }
